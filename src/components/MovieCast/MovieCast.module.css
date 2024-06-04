@@ -1,0 +1,12 @@
+.castList {
+  list-style: none;
+  padding: 0;
+}
+
+.castItem {
+  margin-bottom: 10px;
+}
+
+.castItem p {
+  margin: 0;
+}

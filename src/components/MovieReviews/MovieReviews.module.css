@@ -1,0 +1,13 @@
+.reviewList {
+  list-style: none;
+  padding: 0;
+}
+
+.reviewItem {
+  margin-bottom: 20px;
+}
+
+.reviewItem p {
+  margin: 0;
+  margin-bottom: 5px;
+}
