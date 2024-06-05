@@ -1,17 +1,54 @@
+/*MovieList.module.css*/
+
 .list {
   list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .item {
-  margin-bottom: 10px;
+  flex: 0 0 250px;
+  height: 450px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item:hover {
+  transform: scale(1.05);
 }
 
 .item a {
+  color: inherit;
   text-decoration: none;
-  color: #333;
 }
 
-.item a:hover {
-  text-decoration: underline;
+.moviePoster {
+  width: 215px;
+  height: 325px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  object-fit: cover;
+}
+
+.movieInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.movieTitle {
+  margin: 0;
+}
+
+.movieReleaseDate {
+  margin: 0;
 }

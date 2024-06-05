@@ -1,13 +1,15 @@
-.reviewList {
-  list-style: none;
-  padding: 0;
+/*MovieReviews.module.css*/
+
+.reviews {
 }
 
-.reviewItem {
-  margin-bottom: 20px;
+.list {
 }
 
-.reviewItem p {
-  margin: 0;
-  margin-bottom: 5px;
+.item {
+}
+.reviewAuthor {
+}
+
+.reviewContent {
 }

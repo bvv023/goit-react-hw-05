@@ -1,6 +1,8 @@
+//App.jsx
 import { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
+import { SearchProvider } from './context/SearchContext';
 import css from './App.module.css';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
@@ -9,7 +11,7 @@ const MovieDetailsPage = lazy(() => import('./pages/MovieDetailsPage/MovieDetail
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 const App = () => (
-  <Router>
+  <SearchProvider>
     <div className={css.container}>
       <Navigation />
       <Suspense fallback={<div>Loading...</div>}>
@@ -21,7 +23,7 @@ const App = () => (
         </Routes>
       </Suspense>
     </div>
-  </Router>
+  </SearchProvider>
 );
 
 export default App;

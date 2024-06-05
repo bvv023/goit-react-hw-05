@@ -1,24 +1,58 @@
+/*MovieDetailsPage.module.css*/
 .container {
-  padding: 20px;
+  padding: 16px;
 }
 
-.button {
-  margin-bottom: 20px;
-  padding: 5px 10px;
-  cursor: pointer;
+.backButton {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.backButton:hover {
+  background-color: #0056b3;
+}
+
+.details {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.details img {
+  border-radius: 8px;
 }
 
 .additionalInfo {
-  margin-top: 20px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
 }
 
-.link {
-  display: block;
-  margin-bottom: 10px;
-  color: #333;
+.additionalInfo h3 {
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+.additionalInfo ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.additionalInfo ul li {
+  margin-bottom: 8px;
+}
+
+.additionalInfo ul li a {
+  color: #007bff;
   text-decoration: none;
 }
 
-.link:hover {
+.additionalInfo ul li a:hover {
   text-decoration: underline;
 }
