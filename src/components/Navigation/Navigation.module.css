@@ -1,14 +1,25 @@
-/*Navigation.module.css*/
+/*src/components/Navigation/Navigation.module.css*/
 .nav {
   display: flex;
-  gap: 16px;
+  flex-direction: row;
   padding: 16px;
   background: linear-gradient(to right, #ff69b4, #6495ed, #a9a9a9);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLink {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
 }
 
 .link {
   color: #007bff;
   text-decoration: none;
+  font-size: 1em;
 }
 
 .link:hover {
@@ -18,4 +29,18 @@
 .active {
   font-weight: bold;
   color: #0056b3;
+}
+
+.titleBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: 2em;
+  color: #333;
 }

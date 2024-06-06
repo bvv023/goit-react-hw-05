@@ -1,4 +1,4 @@
-//HomePage.jsx
+//src/pages/HomePage/HomePage.jsx
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import MovieList from '../../components/MovieList/MovieList';
@@ -28,7 +28,7 @@ const HomePage = () => {
 
   return (
     <div className={css.container}>
-      <h1>Trending Movies</h1>
+      <h2>Trending Movies</h2>
       <MovieList movies={movies} />
     </div>
   );

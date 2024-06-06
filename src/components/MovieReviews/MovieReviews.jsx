@@ -1,4 +1,4 @@
-//MovieReviews.jsx
+//src/components/MovieReviews/MovieReviews.jsx
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -28,7 +28,7 @@ const MovieReviews = () => {
   }, [movieId]);
 
   return (
-    <div className={css.reviews}>
+    <div>
       <ul className={css.list}>
         {reviews.map(review => (
           <li key={review.id} className={css.item}>

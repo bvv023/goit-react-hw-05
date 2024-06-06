@@ -1,4 +1,4 @@
-//MovieDetailsPage.jsx
+//src/pages/MovieDetailsPage/MovieDetailsPage.jsx
 import { useEffect, useState, Suspense } from 'react';
 import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -45,10 +45,10 @@ const MovieDetailsPage = () => {
           width={250}
           alt="poster"
         />
-        <div>
-          <h1>{movie.title}</h1>
-          <p>{movie.overview}</p>
-          <p>Release Date: {movie.release_date}</p>
+        <div className={css.movieInfo}>
+          <h1 className={css.movieTitle}>{movie.title}</h1>
+          <p className={css.movieOverview}>{movie.overview}</p>
+          <p className={css.releaseDate}>Release Date: {movie.release_date}</p>
         </div>
       </div>
       <div className={css.additionalInfo}>

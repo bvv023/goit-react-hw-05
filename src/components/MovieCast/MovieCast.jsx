@@ -1,8 +1,8 @@
-//MovieCast.jsx
+//src/components/MovieCast/MovieCast.jsx
+
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import css from './MovieCast.module.css';
 
 const MovieCast = () => {
@@ -51,14 +51,6 @@ const MovieCast = () => {
       </ul>
     </div>
   );
-};
-
-MovieCast.propTypes = {
-  cast: PropTypes.arrayOf(PropTypes.shape({
-    cast_id: PropTypes.number.isRequired,
-    profile_path: PropTypes.string,
-    name: PropTypes.string.isRequired,
-  })),
 };
 
 export default MovieCast;

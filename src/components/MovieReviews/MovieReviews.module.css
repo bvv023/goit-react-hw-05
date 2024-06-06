@@ -1,15 +1,30 @@
-/*MovieReviews.module.css*/
-
-.reviews {
-}
+/* src/components/MovieReviews/MovieReviews.module.css */
 
 .list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .item {
+  padding: 16px;
+  background-color: #f0ffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .reviewAuthor {
+  font-weight: bold;
+  color: #0056b3;
+  margin-bottom: 8px;
 }
 
 .reviewContent {
+  font-size: 1em;
+  color: #333;
+  line-height: 1.6;
 }

@@ -1,9 +1,10 @@
-/*HomePage.module.css*/
+/*src/pages/HomePage/HomePage.module.css*/
 .container {
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
-h1 {
+h2 {
   font-size: 2em;
   margin-bottom: 16px;
   color: #333;

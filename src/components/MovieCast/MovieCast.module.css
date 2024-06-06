@@ -1,4 +1,4 @@
-/*MovieCast.module.css*/
+/*src/components/MovieCact/MovieCast.module.css*/
 
 .cast {
   display: flex;
@@ -11,18 +11,16 @@
   padding-right: 0;
 }
 
-._gallery_wx23i_1 {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
   gap: 16px;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .item {
@@ -31,7 +29,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 16px;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #f0ffff;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -42,7 +40,6 @@
   width: 215px;
   height: 325px;
   border-radius: 8px;
-  margin-bottom: 8px;
   object-fit: cover;
 }
 
