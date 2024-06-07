@@ -1,56 +1,66 @@
-//src/pages/MoviesPage/MoviesPage.jsx
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import axios from 'axios';
+import { useState, useRef } from 'react';
 import { useSearch } from '../../context/SearchContext';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import css from './MoviesPage.module.css';
-import MovieList from '../../components/MovieList/MovieList';
 
 const MoviesPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState('');
   const { searchResults, setSearchResults } = useSearch();
-  const [query, setQuery] = useState(searchParams.get('query') || '');
+  const inputRef = useRef(null);
 
-  useEffect(() => {
-    if (!searchParams.get('query')) return;
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    if (!query) return;
 
-    const fetchMovies = async () => {
-      const url = `https://api.themoviedb.org/3/search/movie?query=${searchParams.get('query')}&include_adult=false&language=en-US&page=1`;
-      const options = {
+    try {
+      const response = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
+        params: {
+          query,
+        },
         headers: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYzFlZjYyNjU5NGZlZWI2MTc4Y2JhNjBhOTU1MjkyZSIsInN1YiI6IjY2NWRkNjg2N2Q2YjY0YTgzMzA5MzUxOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZZwkcO9-B3T64ay5m1Xyd3F6fCzq78GbTIOQ4fbkzHQ'
-        }
-      };
-
-      try {
-        const response = await axios.get(url, options);
-        setSearchResults(response.data.results);
-      } catch (err) {
-        console.error(err);
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYzFlZjYyNjU5NGZlZWI2MTc4Y2JhNjBhOTU1MjkyZSIsInN1YiI6IjY2NWRkNjg2N2Q2YjY0YTgzMzA5MzUxOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZZwkcO9-B3T64ay5m1Xyd3F6fCzq78GbTIOQ4fbkzHQ',
+        },
+      });
+      setSearchResults(response.data.results);
+      setQuery('');
+      if (inputRef.current) {
+        inputRef.current.value = '';
       }
-    };
-
-    fetchMovies();
-  }, [searchParams, setSearchResults]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSearchParams({ query });
+    } catch (error) {
+      console.error('Failed to fetch search results', error);
+    }
   };
 
   return (
     <div className={css.container}>
-      <form onSubmit={handleSubmit} className={css.form}>
+      <form onSubmit={handleSearch} className={css.searchForm}>
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className={css.input}
-          autoComplete="on"
+          ref={inputRef}
+          placeholder="Search for movies..."
+          className={css.searchInput}
         />
-        <button type="submit" className={css.button}>Search</button>
+        <button type="submit" className={css.searchButton}>Search</button>
       </form>
-      {searchResults && <MovieList movies={searchResults} />}
+
+      {searchResults && (
+        <ul className={css.list}>
+          {searchResults.map(movie => (
+            <li key={movie.id} className={css.item}>
+              <Link to={`/movies/${movie.id}`} state={{ from: window.location.pathname }}>
+                <img className={css.moviePoster} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                <div className={css.movieInfo}>
+                  <p className={css.movieTitle}>{movie.title}</p>
+                  <p className={css.movieReleaseDate}>{new Date(movie.release_date).getFullYear()}</p>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
