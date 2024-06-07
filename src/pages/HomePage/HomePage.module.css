@@ -1,4 +1,4 @@
-/*src/pages/HomePage/HomePage.module.css*/
+/* src/pages/HomePage/HomePage.module.css */
 .container {
   display: flex;
   flex-direction: column;
@@ -8,4 +8,65 @@ h2 {
   font-size: 2em;
   margin-bottom: 16px;
   color: #333;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 16px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.item {
+  flex: 0 0 250px;
+  height: 450px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #f0ffff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item:hover {
+  transform: scale(1.05);
+}
+
+.moviePoster {
+  width: 215px;
+  height: 325px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  margin-bottom: 8px;
+}
+
+.movieInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.movieTitle {
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  text-decoration: none;
+}
+
+.movieReleaseDate {
+  color: #666;
+  margin: 0;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
 }

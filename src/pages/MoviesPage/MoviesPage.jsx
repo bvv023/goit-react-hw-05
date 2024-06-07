@@ -46,6 +46,7 @@ const MoviesPage = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className={css.input}
+          autoComplete="on"
         />
         <button type="submit" className={css.button}>Search</button>
       </form>

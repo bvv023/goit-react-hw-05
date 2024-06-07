@@ -1,4 +1,4 @@
-//src/pages/MovieDetailsPage/MovieDetailsPage.jsx
+// src/pages/MovieDetailsPage/MovieDetailsPage.jsx
 import { useEffect, useState, Suspense } from 'react';
 import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -10,6 +10,7 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const [movie, setMovie] = useState(null);
+  const backLink = '/movies'; // default back link
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -34,11 +35,11 @@ const MovieDetailsPage = () => {
 
   if (!movie) return <div>Loading...</div>;
 
-  const backLink = location.state?.from ?? '/movies';
+  const backLinkFromState = location.state?.from ?? backLink; // get from state or default
 
   return (
     <div className={css.container}>
-      <Link to={backLink} className={css.backButton}>Go back</Link>
+      <Link to={backLinkFromState} className={css.backButton}>Go back</Link>
       <div className={css.details}>
         <img
           src={movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : defaultImg}
@@ -55,10 +56,10 @@ const MovieDetailsPage = () => {
         <h3>Additional Information</h3>
         <ul>
           <li>
-            <Link to={`/movies/${movieId}/cast`} state={{ from: backLink }}>Cast</Link>
+            <Link to={`/movies/${movieId}/cast`} state={{ from: backLinkFromState }}>Cast</Link>
           </li>
           <li>
-            <Link to={`/movies/${movieId}/reviews`} state={{ from: backLink }}>Reviews</Link>
+            <Link to={`/movies/${movieId}/reviews`} state={{ from: backLinkFromState }}>Reviews</Link>
           </li>
         </ul>
       </div>
