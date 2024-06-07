@@ -1,7 +1,7 @@
-// src/pages/MovieDetailsPage/MovieDetailsPage.jsx
 import { useEffect, useState, Suspense } from 'react';
 import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import css from './MovieDetailsPage.module.css';
 import MovieCast from '../../components/MovieCast/MovieCast';
 import MovieReviews from '../../components/MovieReviews/MovieReviews';
@@ -10,7 +10,7 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const [movie, setMovie] = useState(null);
-  const backLink = '/movies'; // default back link
+  const backLink = '/movies';
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -35,7 +35,7 @@ const MovieDetailsPage = () => {
 
   if (!movie) return <div>Loading...</div>;
 
-  const backLinkFromState = location.state?.from ?? backLink; // get from state or default
+  const backLinkFromState = location.state?.from ?? backLink;
 
   return (
     <div className={css.container}>
@@ -66,7 +66,7 @@ const MovieDetailsPage = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="cast" element={<MovieCast />} />
-          <Route path="reviews" element={<MovieReviews />} />
+          <Route path="reviews" element={<MovieReviews onEmpty={() => toast.error('Sorry, there are no reviews yet')} />} />
         </Routes>
       </Suspense>
     </div>
@@ -74,3 +74,4 @@ const MovieDetailsPage = () => {
 };
 
 export default MovieDetailsPage;
+

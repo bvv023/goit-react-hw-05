@@ -1,4 +1,3 @@
-// src/components/MovieList/MovieList.jsx
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import css from './MovieList.module.css';

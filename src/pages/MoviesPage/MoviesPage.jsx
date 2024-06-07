@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { useSearch } from '../../context/SearchContext';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import css from './MoviesPage.module.css';
 
 const MoviesPage = () => {
@@ -11,7 +12,10 @@ const MoviesPage = () => {
 
   const handleSearch = async (event) => {
     event.preventDefault();
-    if (!query) return;
+    if (!query) {
+      toast.error('Please enter your request');
+      return;
+    }
 
     try {
       const response = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
@@ -22,6 +26,9 @@ const MoviesPage = () => {
           Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYzFlZjYyNjU5NGZlZWI2MTc4Y2JhNjBhOTU1MjkyZSIsInN1YiI6IjY2NWRkNjg2N2Q2YjY0YTgzMzA5MzUxOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZZwkcO9-B3T64ay5m1Xyd3F6fCzq78GbTIOQ4fbkzHQ',
         },
       });
+      if (response.data.results.length === 0) {
+        toast.error('Sorry, nothing was found for your search');
+      }
       setSearchResults(response.data.results);
       setQuery('');
       if (inputRef.current) {

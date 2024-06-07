@@ -1,8 +1,8 @@
-//src/App.jsx
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 import { SearchProvider } from './context/SearchContext';
+import ToastContainer from './components/ToastContainer/ToastContainer';
 import css from './App.module.css';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
@@ -14,6 +14,7 @@ const App = () => (
   <SearchProvider>
     <div className={css.container}>
       <Navigation />
+      <ToastContainer />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
