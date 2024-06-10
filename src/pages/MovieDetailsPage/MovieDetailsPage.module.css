@@ -18,19 +18,29 @@
   background-color: #0056b3;
 }
 
-.details {
+.movieBox {
   display: flex;
+  flex-direction: column;
   gap: 16px;
   margin-bottom: 16px;
 }
 
-.details img {
+.details {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.poster {
   border-radius: 8px;
+  width: 250px;
+  height: 375px;
 }
 
 .movieInfo {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .movieTitle {
@@ -43,10 +53,17 @@
 
 .movieOverview {
   font-size: 18px;
+  margin: 0;
+}
+
+.rating {
+  font-size: 30px;
+  margin: 0;
 }
 
 .releaseDate {
   font-size: 20px;
+  margin: 0;
 }
 
 .additionalInfo {

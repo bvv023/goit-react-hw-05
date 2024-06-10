@@ -1,6 +1,7 @@
+// src/pages/HomePage/HomePage.jsx
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import MovieList from '../../components/MovieList/MovieList';
 import css from './HomePage.module.css';
 
 const HomePage = () => {
@@ -28,19 +29,7 @@ const HomePage = () => {
   return (
     <div className={css.container}>
       <h2>Trending Movies</h2>
-      <ul className={css.list}>
-        {movies.map(movie => (
-          <li key={movie.id} className={css.item}>
-            <Link to={`/movies/${movie.id}`} state={{ from: window.location.pathname }}>
-              <img className={css.moviePoster} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
-              <div className={css.movieInfo}>
-                <p className={css.movieTitle}>{movie.title}</p>
-                <p className={css.movieReleaseDate}>{new Date(movie.release_date).getFullYear()}</p>
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <MovieList movies={movies} />
     </div>
   );
 };

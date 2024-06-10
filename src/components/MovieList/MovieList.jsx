@@ -1,13 +1,16 @@
-import { Link } from 'react-router-dom';
+// src/components/MovieList/MovieList.jsx
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import css from './MovieList.module.css';
 
 const MovieList = ({ movies }) => {
+  const location = useLocation();
+
   return (
     <ul className={css.list}>
       {movies.map(movie => (
         <li key={movie.id} className={css.item}>
-          <Link to={`/movies/${movie.id}`} state={{ from: window.location.pathname }}>
+          <Link to={`/movies/${movie.id}`} state={{ from: location }}>
             <img className={css.moviePoster} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
             <div className={css.movieInfo}>
               <p className={css.movieTitle}>{movie.title}</p>

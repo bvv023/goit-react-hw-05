@@ -1,16 +1,10 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+// src/context/SearchContext.js
+import { createContext, useContext, useState } from 'react';
 
 const SearchContext = createContext();
 
-export const useSearch = () => useContext(SearchContext);
-
 export const SearchProvider = ({ children }) => {
   const [searchResults, setSearchResults] = useState(null);
-
-  useEffect(() => {
-    // Очищення результатів пошуку при завантаженні компонента
-    setSearchResults(null);
-  }, []);
 
   return (
     <SearchContext.Provider value={{ searchResults, setSearchResults }}>
@@ -18,3 +12,5 @@ export const SearchProvider = ({ children }) => {
     </SearchContext.Provider>
   );
 };
+
+export const useSearch = () => useContext(SearchContext);

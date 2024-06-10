@@ -1,27 +1,34 @@
-import { useState, useRef } from 'react';
-import { useSearch } from '../../context/SearchContext';
-import { Link } from 'react-router-dom';
+// src/pages/MoviesPage/MoviesPage.jsx
+import { useState, useRef, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import MovieList from '../../components/MovieList/MovieList';
 import css from './MoviesPage.module.css';
 
 const MoviesPage = () => {
   const [query, setQuery] = useState('');
-  const { searchResults, setSearchResults } = useSearch();
+  const [searchResults, setSearchResults] = useState([]);
   const inputRef = useRef(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleSearch = async (event) => {
-    event.preventDefault();
-    if (!query) {
+  useEffect(() => {
+    const queryParam = searchParams.get('query');
+    if (queryParam) {
+      setQuery(queryParam);
+      handleSearch(queryParam);
+    }
+  }, [searchParams]);
+
+  const handleSearch = async (queryParam) => {
+    if (!queryParam) {
       toast.error('Please enter your request');
       return;
     }
 
     try {
       const response = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
-        params: {
-          query,
-        },
+        params: { query: queryParam },
         headers: {
           Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzYzFlZjYyNjU5NGZlZWI2MTc4Y2JhNjBhOTU1MjkyZSIsInN1YiI6IjY2NWRkNjg2N2Q2YjY0YTgzMzA5MzUxOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZZwkcO9-B3T64ay5m1Xyd3F6fCzq78GbTIOQ4fbkzHQ',
         },
@@ -39,9 +46,15 @@ const MoviesPage = () => {
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSearchParams({ query });
+    handleSearch(query);
+  };
+
   return (
     <div className={css.container}>
-      <form onSubmit={handleSearch} className={css.searchForm}>
+      <form onSubmit={handleSubmit} className={css.searchForm}>
         <input
           type="text"
           value={query}
@@ -53,21 +66,7 @@ const MoviesPage = () => {
         <button type="submit" className={css.searchButton}>Search</button>
       </form>
 
-      {searchResults && (
-        <ul className={css.list}>
-          {searchResults.map(movie => (
-            <li key={movie.id} className={css.item}>
-              <Link to={`/movies/${movie.id}`} state={{ from: window.location.pathname }}>
-                <img className={css.moviePoster} src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
-                <div className={css.movieInfo}>
-                  <p className={css.movieTitle}>{movie.title}</p>
-                  <p className={css.movieReleaseDate}>{new Date(movie.release_date).getFullYear()}</p>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      {searchResults.length > 0 && <MovieList movies={searchResults} />}
     </div>
   );
 };
